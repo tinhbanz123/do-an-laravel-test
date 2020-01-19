@@ -41,6 +41,18 @@ Route::group(['prefix' => 'customer','as' => 'customer.'], function(){
     Route::get('/detail/{id}','CustomerController@show') ->name('show');
 });
 
+
+Route::group(['prefix' => 'booking','as' => 'booking.'], function(){
+    Route::get('/','BookingController@index') -> name('index');
+    Route::get('/create','BookingController@create') -> name('create');
+    Route::post('/store','BookingController@store') -> name('store');
+    Route::get('/edit/{id}','BookingController@edit') ->name('edit');
+    Route::post('/update/{id}','BookingController@update') ->name('update');
+    Route::post('/delete/{id}','BookingController@destroy') ->name('destroy');
+    Route::get('/detail/{id}','BookingController@show') ->name('show');
+});
+
+
 Route::group(['prefix' => 'findroom','as' => 'findroom.'], function(){
     Route::get('/', 'FindRoomController@index')->name('find_rooms');
     Route::get('/search', 'FindRoomController@show')->name('show_rooms');

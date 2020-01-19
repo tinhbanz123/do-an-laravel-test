@@ -51,9 +51,9 @@ class FindRoomController extends Controller
         $time_to = $request->input('time_to');
 //        dd($time_from);
 //        $rooms = Room::with('Booking');
-        $rooms = Booking::all();
-        $rooms = $rooms->where('time_from', '>=', $time_to)->orWhere('time_to', '<=', $time_from);
-        $rooms = $rooms->get();
+//        $rooms = Booking::all();
+        $rooms = Booking::where('time_from', '>=', $time_to)->orWhere('time_to', '<=', $time_from);
+        $rooms = $rooms->pluck('room_id','id');
         dd($rooms);
     }
 

@@ -10,4 +10,8 @@ class Booking extends Model
     {
         return $this->belongsTo('App\Model\Room','room_id','id');
     }
+    public function customer()
+    {
+        return $this->belongsTo('App\Model\Customer','customer_id','id');
+    }
 }
