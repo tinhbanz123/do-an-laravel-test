@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Model\Booking;
+use App\Model\Room;
 use Illuminate\Http\Request;
 
 class FindRoomController extends Controller
@@ -43,9 +45,16 @@ class FindRoomController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Request $request)
     {
-        //
+        $time_from = $request->input('time_from');
+        $time_to = $request->input('time_to');
+//        dd($time_from);
+//        $rooms = Room::with('Booking');
+        $rooms = Booking::all();
+        $rooms = $rooms->where('time_from', '>=', $time_to)->orWhere('time_to', '<=', $time_from);
+        $rooms = $rooms->get();
+        dd($rooms);
     }
 
     /**

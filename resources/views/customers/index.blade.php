@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="container">
-        <h1>Room List</h1>
+        <h1>Customer List</h1>
 
         {{--show message success--}}
         @if(session()->has('success'))
@@ -28,43 +28,45 @@
             </div>
         @endif
 
-        <a href="{{ route('room.create') }}" class="btn btn-success">Create Room</a>
-        @if(empty($rooms))
+        <a href="{{ route('customer.create') }}" class="btn btn-success">Create Customer</a>
+        @if(empty($customers))
             <p>Not found data</p>
         @else
             <table class="table table-bordered table-striped">
                 <tr>
                     <th>ID</th>
-                    <th>Room Number</th>
-                    <th>Description</th>
-                    <th>Status</th>
-                    <th>Price</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Address</th>
+                    <th>Phone</th>
+                    <th>Mail</th>
                     <th colspan="3">Action</th>
                 </tr>
-                @foreach($rooms as $value)
+                @foreach($customers as $value)
                     <tr>
                         <td>{{ $value->id}}</td>
-                        <td>{{ $value->room_number }}</td>
-                        <td>{{ $value->description }}</td>
-                        <td>{{ ($value->status == 0) ? 'còn phòng' : 'hết phòng' }}</td>
-                        <td>{{ $value->price . ' / ngày' }}</td>
-                        <td><a href="{{ route('room.show', $value->id) }}" class="btn btn-success">Detail</a></td>
-                        <td><a href="{{ route('room.edit', $value->id) }}" class="btn btn-primary">Edit</a></td>
+                        <td>{{ $value->first_name }}</td>
+                        <td>{{ $value->last_name }}</td>
+                        <td>{{ $value->address }}</td>
+                        <td>{{ $value->phone }}</td>
+                        <td>{{ $value->email }}</td>
+                        <td><a href="{{ route('customer.show', $value->id) }}" class="btn btn-success">Detail</a></td>
+                        <td><a href="{{ route('customer.edit', $value->id) }}" class="btn btn-primary">Edit</a></td>
                         <td>
-                            <form action="{{ route('room.destroy', $value->id) }}" method="post">
+                            <form action="{{ route('customer.destroy', $value->id) }}" method="post">
                                 @csrf
-                                 <button type="button" class="btn btn-danger" onclick="confirmDelete(this)">Delete</button>
+                                <button type="button" class="btn btn-danger" onclick="confirmDelete(this)">Delete</button>
                             </form>
                         </td>
                     </tr>
                 @endforeach
             </table>
 
-{{--            paginate--}}
+            {{--            paginate--}}
 
-            <div class="text-center">
-                {{ $rooms->appends(request()->all())->links() }}
-            </div>
+                <div class="text-center">
+                    {{ $customers->appends(request()->all())->links() }}
+                </div>
         @endif
     </div>
 @endsection
