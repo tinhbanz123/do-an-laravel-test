@@ -2,7 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CustomerRequest;
+use App\Model\Customer;
+use App\Model\Room;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class CustomerController extends Controller
 {
@@ -13,7 +17,10 @@ class CustomerController extends Controller
      */
     public function index()
     {
-        //
+        $data = [];
+        $customers = Customer::paginate(4);
+        $data['customers'] = $customers;
+        return view('customers.index',$data);
     }
 
     /**
@@ -23,7 +30,7 @@ class CustomerController extends Controller
      */
     public function create()
     {
-        //
+        return view('customers.create');
     }
 
     /**
@@ -32,9 +39,29 @@ class CustomerController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CustomerRequest $request)
     {
-        //
+        $params = $request->all();
+        $dataInsert = [
+            'first_name' => $params['first'],
+            'last_name' => $params['last'],
+            'address' => $params['address'],
+            'phone' => $params['phone'],
+            'email' => $params['email'],
+        ];
+//        dd($dataInsert);
+        try {
+            DB::beginTransaction();
+
+            Customer::insert($dataInsert);
+
+            DB::commit();
+
+            return redirect(route('customer.index'))->with('success', 'thêm mới thành công.');
+        } catch (\Exception $exception) {
+            DB::rollBack();
+            return redirect(route('customer.index'))->with('error', 'thêm mới thất bại.');
+        }
     }
 
     /**
@@ -56,7 +83,10 @@ class CustomerController extends Controller
      */
     public function edit($id)
     {
-        //
+        $data = [];
+        $customer = Customer::findOrFail($id);
+        $data['customer'] = $customer;
+        return view('customers.edit',$data);
     }
 
     /**
@@ -66,9 +96,26 @@ class CustomerController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(CustomerRequest $request, $id)
     {
-        //
+        $params = $request->all();
+        $dataInsert = [
+            'first_name' => $params['first'],
+            'last_name' => $params['last'],
+            'address' => $params['address'],
+            'phone' => $params['phone'],
+            'email' => $params['email'],
+        ];
+
+        try {
+            DB::beginTransaction();
+            Customer::where('id',$id)->update($dataInsert);
+            DB::commit();
+            return redirect()->route('customer.index')->with('success','Update successful.');
+        }catch (\Exception $exception) {
+            DB::rollBack();
+            return redirect()->route('customer.index')->with('error','Update fail.');
+        }
     }
 
     /**

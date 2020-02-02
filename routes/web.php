@@ -28,7 +28,20 @@ Route::group(['prefix' => 'room','as' => 'room.'], function(){
     Route::post('/update/{id}','RoomController@update') ->name('update');
     Route::post('/delete/{id}','RoomController@destroy') ->name('destroy');
     Route::get('/detail/{id}','RoomController@show') ->name('show');
-    Route::get('/search', 'FindRoomController@index')->name('find_rooms');
 });
 
 
+Route::group(['prefix' => 'customer','as' => 'customer.'], function(){
+    Route::get('/','CustomerController@index') -> name('index');
+    Route::get('/create','CustomerController@create') -> name('create');
+    Route::post('/store','CustomerController@store') -> name('store');
+    Route::get('/edit/{id}','CustomerController@edit') ->name('edit');
+    Route::post('/update/{id}','CustomerController@update') ->name('update');
+    Route::post('/delete/{id}','CustomerController@destroy') ->name('destroy');
+    Route::get('/detail/{id}','CustomerController@show') ->name('show');
+});
+
+Route::group(['prefix' => 'findroom','as' => 'findroom.'], function(){
+    Route::get('/', 'FindRoomController@index')->name('find_rooms');
+    Route::get('/search', 'FindRoomController@show')->name('show_rooms');
+});
