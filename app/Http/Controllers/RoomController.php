@@ -17,7 +17,7 @@ class RoomController extends Controller
     public function index()
     {
         $data = [];
-        $rooms = Room::paginate(10);
+        $rooms = Room::paginate(5);
         $data['rooms'] = $rooms;
 //        dd($data['rooms']);
         return view('rooms.index',$data);

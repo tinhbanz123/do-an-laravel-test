@@ -57,3 +57,4 @@ Route::group(['prefix' => 'findroom','as' => 'findroom.'], function(){
     Route::get('/', 'FindRoomController@index')->name('find_rooms');
     Route::get('/search', 'FindRoomController@show')->name('show_rooms');
 });
+//code năm mới 10:27 AM , 02/02/2020
