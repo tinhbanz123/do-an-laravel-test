@@ -16,8 +16,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Auth::routes();
-
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::group(['prefix' => 'room','as' => 'room.'], function(){
@@ -58,3 +56,16 @@ Route::group(['prefix' => 'findroom','as' => 'findroom.'], function(){
     Route::get('/search', 'FindRoomController@show')->name('show_rooms');
 });
 //code năm mới 10:27 AM , 02/02/2020
+
+Auth::routes();
+
+//Admin site
+Route::group(['prefix' => 'admin' , 'as' => 'admin.' ,'namespace' => 'Admin'],function (){
+    Route::get('/login', 'LoginController@showLogin')->name('show-login');
+    Route::post('/handle-login','LoginController@handleLogin')->name('handle-login');
+    Route::group(['middleware' => 'admin-check-login'],function ()
+    {
+        Route::get('/','DashboardController@index')->name('dashboard');
+    });
+});
+
