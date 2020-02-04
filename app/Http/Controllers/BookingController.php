@@ -32,16 +32,30 @@ class BookingController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
+        $params = $request->input();
+        $dataInsert = [
+            'time_from' => $params['time_from'],
+            'time_to' => $params['time_to'],
+            'room_id' => $params['room_id'],
+        ];
+//        dd($params);
         $data = [];
-//        $room = Room::pluck('room_number','id');
-        $room = Room::where('status','!=',1)->pluck('room_number','id');
+//        $room = Room::where('status','!=',1)->pluck('room_number','id');
 //        dd($room);
         $customer = Customer::pluck('first_name','id');
+        $room_name = Room::findOrFail($params['room_id']);
+//        dd($room_name);
 //        dd($customer);
-        $data['rooms'] = $room;
+//        $data['rooms'] = $room;
         $data['customers'] = $customer;
+//        $data['time_from'] = $params['time_from'];
+//        $data['time_to'] = $params['time_to'];
+        $data['room_name'] = $room_name;
+        $data['data_time'] = $dataInsert;
+//        dd( $data['data']);
+//        dd($data['room_name']);
         return view('bookings.create',$data);
     }
 
@@ -142,6 +156,27 @@ class BookingController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $dataRoom = ['status' => 0];
+        try {
+            DB::beginTransaction();
+            $booking = Booking::findOrFail($id);
+            $update_book = $booking->delete();
+            //chuyển status room sang trạng thái còn phòng
+            Room::where('id',$booking->room_id)->update($dataRoom);
+            DB::commit();
+
+            return response()->json([
+                'success' => 'Delete successful.'
+            ]);
+
+//            return redirect()->route('category.index')->with('seccess','Delete successful.');
+        }catch (\Exception $exception){
+            DB::rollBack();
+
+            return response()->json([
+                'error' => 'Delete fail.'
+            ]);
+//            return redirect()->route('category.index')->with('error','Delete fail.' .$exception->getMessage());
+        }
     }
 }

@@ -18,24 +18,24 @@
 
             <div class='form-group'>
                 <label>Time from *</label>
-                <input type="date" class="form-control" name="time_from"  >
+                <input type="date" class="form-control" name="time_from" value={{$data_time['time_from']}} >
             </div>
 
             <div class='form-group'>
                 <label>Time to *</label>
-                <input type="date" class='form-control' name='time_to' >
+                <input type="date" class='form-control' name='time_to' value={{$data_time['time_to']}}>
             </div>
 
             <div class='form-group'>
                 <label>Room Number</label>
-                @if($rooms)
+{{--                @if($rooms)--}}
                     <select name="number" class="form-control">
-                        <option value=""></option>
-                        @foreach($rooms as $key => $value)
-                            <option value="{{ $key }}" >{{ $value }}</option>
-                        @endforeach
+                        <option value="{{$room_name->id}}">{{$room_name->room_number}}</option>
+{{--                        @foreach($rooms as $key => $value)--}}
+{{--                            <option value="{{ $key }}" >{{ $value }}</option>--}}
+{{--                        @endforeach--}}
                     </select>
-                @endif
+{{--                @endif--}}
 
             </div>
 

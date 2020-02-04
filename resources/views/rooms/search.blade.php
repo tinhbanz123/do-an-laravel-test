@@ -12,7 +12,7 @@
             </div>
         @endif
         <form action="{{ route('findroom.show_rooms')}}" method='get'>
-            @csrf
+{{--            @csrf--}}
             <div class='form-group'>
                 <label>Time from *</label>
                 <input type="date" class="form-control" name="time_from" required >
@@ -26,6 +26,7 @@
 
             <div class='form-group'>
                 <button type='submit' class='btn btn-primary'>Search</button>
+{{--                <a href="{{ route('findroom.show_rooms')}}" class="btn btn-primary">Search</a>--}}
             </div>
         </form>
     </div>

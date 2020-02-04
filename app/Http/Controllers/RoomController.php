@@ -17,7 +17,7 @@ class RoomController extends Controller
     public function index()
     {
         $data = [];
-        $rooms = Room::paginate(5);
+        $rooms = Room::paginate(15);
         $data['rooms'] = $rooms;
 //        dd($data['rooms']);
         return view('rooms.index',$data);
@@ -71,7 +71,12 @@ class RoomController extends Controller
      */
     public function show($id)
     {
-        //
+//        dd('111');
+        $data = [];
+        $room = Room::findOrFail($id);
+//        dd($room);
+        $data['room'] = $room;
+        return view('rooms.show',$data);
     }
 
     /**
