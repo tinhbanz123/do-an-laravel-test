@@ -29,6 +29,7 @@ class CustomerRequest extends FormRequest
             'address' => 'required',
             'phone' => 'required|numeric|min:10,phone,' . $this->id,
             'email' => 'required|unique:customers,email,'. $this->id,
+            'pass' => 'required|min:6|max:10'
         ];
     }
 }

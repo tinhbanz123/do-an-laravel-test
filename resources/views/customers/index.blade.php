@@ -40,6 +40,7 @@
                     <th>Address</th>
                     <th>Phone</th>
                     <th>Mail</th>
+                    <th>Password</th>
                     <th colspan="3">Action</th>
                 </tr>
                 @foreach($customers as $value)
@@ -50,6 +51,7 @@
                         <td>{{ $value->address }}</td>
                         <td>{{ $value->phone }}</td>
                         <td>{{ $value->email }}</td>
+                        <td>{{ $value->password }}</td>
                         <td><a href="{{ route('customer.show', $value->id) }}" class="btn btn-success">Detail</a></td>
                         <td><a href="{{ route('customer.edit', $value->id) }}" class="btn btn-primary">Edit</a></td>
                         <td>

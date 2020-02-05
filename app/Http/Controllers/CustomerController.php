@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CustomerRequest;
 use App\Model\Customer;
+use App\Model\Role;
 use App\Model\Room;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -30,6 +31,10 @@ class CustomerController extends Controller
      */
     public function create()
     {
+//        $data = [];
+//        $role = Role::pluck('name','id');
+//        $data['roles'] = $role;
+//        dd($data['roles']);
         return view('customers.create');
     }
 
@@ -48,6 +53,10 @@ class CustomerController extends Controller
             'address' => $params['address'],
             'phone' => $params['phone'],
             'email' => $params['email'],
+//            'pass_no_hash' => $params['pass'],
+//            'password' => bcrypt($params['pass']),
+            'password' => $params['pass'],
+            'role_id' => $params['role'],
         ];
 //        dd($dataInsert);
         try {
@@ -105,6 +114,9 @@ class CustomerController extends Controller
             'address' => $params['address'],
             'phone' => $params['phone'],
             'email' => $params['email'],
+//            'pass_no_hash' => $params['pass'],
+            'password' => $params['pass'],
+//            'role_id' => $params['role'],
         ];
 
         try {
@@ -126,6 +138,20 @@ class CustomerController extends Controller
      */
     public function destroy($id)
     {
-        //
+        try {
+            DB::beginTransaction();
+            Customer::findOrFail($id)->delete();
+            DB::commit();
+
+            return response()->json([
+                'success' => 'Delete successful.'
+            ]);
+        }catch (\Exception $exception) {
+            DB::rollBack();
+
+            return response()->json([
+                'error' => 'Delete fail.'
+            ]);
+        }
     }
 }

@@ -38,6 +38,24 @@
                 <input type="email" class='form-control' name='email'>
             </div>
 
+            <div class='form-group'>
+                <label>PassWord</label>
+                <input type="text" class='form-control' name='pass'>
+            </div>
+
+            <div class='form-group'>
+{{--                <label for="">Role</label>--}}
+{{--                @if($roles)--}}
+{{--                    <select name="role" class="form-control">--}}
+{{--                        <option value=""></option>--}}
+{{--                        @foreach($roles as $key => $value)--}}
+{{--                            <option value="{{ $key }}" >{{ $value }}</option>--}}
+{{--                        @endforeach--}}
+{{--                    </select>--}}
+{{--                @endif--}}
+                <input type="hidden" name="role" value="3">
+            </div>
+
 
             <div class='form-group'>
                 <button type='submit' class='btn btn-primary'>Create</button>
