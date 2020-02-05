@@ -19,6 +19,7 @@ class CustomerSeeder extends Seeder
                 'address' => 'address 01',
                 'phone' => '09080703',
                 'email' => 'email01@gmail.com',
+                'password' => bcrypt('123456'),
             ],
             [
                 'first_name' => 'First Name 02',
@@ -26,6 +27,7 @@ class CustomerSeeder extends Seeder
                 'address' => 'address 02',
                 'phone' => '09080702',
                 'email' => 'email02@gmail.com',
+                'password' => bcrypt('123456'),
             ]
         ];
 

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\LoginRequest;
+use App\Model\Customer;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -20,8 +21,8 @@ class LoginController extends Controller
 //        dd($request->all());
 
         //check email exist
-        $user = User::where('email', $request->email)->first();
-//        dd($check);
+        $user = Customer::where('email', $request->email)->first();
+//        dd($user);
         if (empty($user)) {
             return redirect()->back()->with('error', 'email invalid');
         }

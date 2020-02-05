@@ -39,6 +39,11 @@
             </div>
 
             <div class='form-group'>
+                <label>Password</label>
+                <input type="text" class='form-control' name='pass' value="{{ old('email',$customer->password) }}">
+            </div>
+
+            <div class='form-group'>
                 <button type='submit' class='btn btn-primary'>Update</button>
             </div>
         </form>
