@@ -15,8 +15,8 @@ class CreateBookingsTable extends Migration
     {
         Schema::create('bookings', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->date('time_from')->format('d-m-y');
-            $table->date('time_to')->format('d-m-y');
+            $table->date('time_from');
+            $table->date('time_to');
 
             $table->unsignedBigInteger('customer_id');
             $table->foreign('customer_id')->references('id')->on('customers')->onDelete('cascade');

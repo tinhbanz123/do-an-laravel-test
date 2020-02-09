@@ -11,23 +11,55 @@
                 </ul>
             </div>
         @endif
-        <form action="{{ route('findroom.show_rooms')}}" method='get'>
-{{--            @csrf--}}
-            <div class='form-group'>
-                <label>Time from *</label>
-                <input type="date" class="form-control" name="time_from" required >
-            </div>
-
-            <div class='form-group'>
-                <label>Time to *</label>
-                <input type="date" class='form-control' name='time_to' required>
-            </div>
 
 
-            <div class='form-group'>
-                <button type='submit' class='btn btn-primary'>Search</button>
-{{--                <a href="{{ route('findroom.show_rooms')}}" class="btn btn-primary">Search</a>--}}
-            </div>
-        </form>
+        <div class='form-group'>
+            <form action="{{ route('search-room.find_rooms')}}" method='get'>
+    {{--            @csrf--}}
+                <div class='form-group'>
+                    <label>Time from *</label>
+                    <input type="date" class="form-control" name="time_from" required
+                           value="{{ old('time_from',$time_from) }}">
+                </div>
+
+                <div class='form-group'>
+                    <label>Time to *</label>
+                    <input type="date" class='form-control' name='time_to'  required
+                           value="{{ old('time_to',$time_to) }}">
+                </div>
+
+
+                <div class='form-group'>
+                    <button type='submit' class='btn btn-primary'>Search</button>
+                </div>
+            </form>
+        </div>
+
+
+        <div class='form-group'>
+            @if (!empty($room))
+                <table class="table table-bordered table-striped">
+                    <tr>
+                        <th>ID</th>
+                        <th>Room Number</th>
+                        <th>Description</th>
+                        <th>Price</th>
+                        <th colspan='2'>Action</th>
+                    </tr>
+                    @foreach($room as $value)
+                        <tr>
+                            <td>{{ $value->id}}</td>
+                            <td>{{ $value->room_number }}</td>
+                            <td>{{ $value->description }}</td>
+                            <td>{{ $value->price . ' / ngày' }}</td>
+                            <td><a href="{{ route('room.show',['id' => $value->id,'time_from' => $time_from, 'time_to' => $time_to])}}" class="btn btn-success">Detail</a></td>
+                            <td><a href="{{ route('booking.create',['room_id' => $value->id,'time_from' => $time_from, 'time_to' => $time_to])}}" class="btn btn-primary">Book Room</a></td>
+                        </tr>
+                    @endforeach
+                </table>
+            @endif
+        </div>
+
+
     </div>
 @endsection

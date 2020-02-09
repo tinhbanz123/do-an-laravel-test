@@ -18,25 +18,39 @@ class LoginController extends Controller
 
     public function handleLogin(LoginRequest $request)
     {
-//        dd($request->all());
-
         //check email exist
-        $user = Customer::where('email', $request->email)->first();
-//        dd($user);
-        if (empty($user)) {
+        $customer = Customer::where('email', $request->email)->first();
+//        dd($customer);
+        if (empty($customer)) {
             return redirect()->back()->with('error', 'email invalid');
         }
 
-
         //check pass exits
-//        $hashed = Hash::make($request->password);
-        if (!Hash::check($request->password,$user->password)) {
+        if (!Hash::check($request->password,$customer->password)) {
             return redirect()->back()->with('error', 'password invalid');
         }
+//        dd('passokl');
+        //check role
+//        $roles = config('const.admin_role');
+////        dd($roles);
+////        dd($customer->role->id);
+//        if(!in_array($customer->role->id,$roles))
+//        {
+//            return redirect()->route('home');
+//        }
+
 
         //ok save session with name : user
-        session(['user' => $user]);
-
+        session(['customer' => $customer]);
+//        dd(session('customer'));
         return redirect()->route('admin.dashboard')->with('success', 'Login successful.');
+    }
+
+    public function logout(Request $request)
+    {
+        //delete session login
+        $request->session()->forget(['customer']);
+        $request->session()->flush();
+        return redirect()->route('admin.show-login');
     }
 }

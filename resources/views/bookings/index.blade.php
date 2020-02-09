@@ -39,6 +39,7 @@
                     <th>Time From</th>
                     <th>Time To</th>
                     <th>Customer Name</th>
+                    <th>Email</th>
                     <th>Room Number</th>
                     <th colspan='3'>Action</th>
                 </tr>
@@ -48,6 +49,7 @@
                         <td>{{ $value->time_from }}</td>
                         <td>{{ $value->time_to }}</td>
                         <td>{{ $value->customer->first_name . ' ' .  $value->customer->last_name}}</td>
+                        <td>{{ $value->customer->email }}</td>
                         <td>{{ $value->room->room_number }}</td>
                         <td><a href="{{ route('booking.show',$value->id)}}" class="btn btn-success">Detail</a></td>
                         <td><a href="{{ route('booking.edit',$value->id)}}" class="btn btn-primary">Edit</a></td>

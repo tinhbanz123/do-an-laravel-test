@@ -11,7 +11,7 @@
                 </ul>
             </div>
         @endif
-        <form action="{{ route('findroom.show_rooms')}}" method='get'>
+        <form action="{{ route('search-room.show_rooms')}}" method='get'>
 {{--            @csrf--}}
             <div class='form-group'>
                 <label>Time from *</label>

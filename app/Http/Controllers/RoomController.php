@@ -69,13 +69,21 @@ class RoomController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Request $request)
     {
+        $params = $request->input();
+        $dataInsert = [
+            'time_from' => $params['time_from'],
+            'time_to' => $params['time_to'],
+            'id' => $params['id'],
+        ];
+//        dd($dataInsert);
 //        dd('111');
         $data = [];
-        $room = Room::findOrFail($id);
+        $room = Room::findOrFail($dataInsert['id']);
 //        dd($room);
         $data['room'] = $room;
+        $data['date'] = $dataInsert;
         return view('rooms.show',$data);
     }
 

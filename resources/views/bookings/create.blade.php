@@ -49,6 +49,12 @@
                         @endforeach
                     </select>
                 @endif
+
+{{--                @if(session('customer'))--}}
+{{--                    <select name="name" class="form-control">--}}
+{{--                        <option value="{{session('customer')['id']}}">{{session('customer')['first_name']}}</option>--}}
+{{--                    </select>--}}
+{{--                @endif--}}
             </div>
 
             <div class='form-group'>

@@ -12,10 +12,6 @@
 */
 
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::group(['prefix' => 'room','as' => 'room.'], function(){
@@ -25,7 +21,8 @@ Route::group(['prefix' => 'room','as' => 'room.'], function(){
     Route::get('/edit/{id}','RoomController@edit') ->name('edit');
     Route::post('/update/{id}','RoomController@update') ->name('update');
     Route::post('/delete/{id}','RoomController@destroy') ->name('destroy');
-    Route::get('/detail/{id}','RoomController@show') ->name('show');
+//    Route::get('/detail/{id}','RoomController@show') ->name('show');
+    Route::get('/detail','RoomController@show') ->name('show');
 });
 
 
@@ -51,9 +48,8 @@ Route::group(['prefix' => 'booking','as' => 'booking.'], function(){
 });
 
 
-Route::group(['prefix' => 'findroom','as' => 'findroom.'], function(){
-    Route::get('/', 'FindRoomController@index')->name('find_rooms');
-    Route::get('/search', 'FindRoomController@show')->name('show_rooms');
+Route::group(['prefix' => 'search-room','as' => 'search-room.'], function(){
+    Route::get('/', 'SearchRoomController@index')->name('find_rooms');
 });
 //code năm mới 10:27 AM , 02/02/2020
 
@@ -61,11 +57,16 @@ Auth::routes();
 
 //Admin site
 Route::group(['prefix' => 'admin' , 'as' => 'admin.' ,'namespace' => 'Admin'],function (){
+    //'namespace' => 'Admin' == thư mục Admin (Controllers/Admin)
     Route::get('/login', 'LoginController@showLogin')->name('show-login');
+    Route::get('/logout', 'LoginController@logout')->name('logout');
     Route::post('/handle-login','LoginController@handleLogin')->name('handle-login');
+    //name : handle-login
+    //function : handleLogin
     Route::group(['middleware' => 'admin-check-login'],function ()
     {
         Route::get('/','DashboardController@index')->name('dashboard');
     });
+
 });
 

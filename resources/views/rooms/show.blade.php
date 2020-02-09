@@ -31,6 +31,7 @@
                 </tr>
             </table>
         @endif
-        <a href="{{ route('booking.show',$room->id) }}" class="btn btn-success">Back</a>
+        <a href="{{ route('search-room.find_rooms',['time_from' => $date['time_from'],'time_to' => $date['time_to']]) }}" class="btn btn-success">Back</a>
+        <a href="{{ route('booking.create',['room_id' => $date['id'],'time_from' => $date['time_from'],'time_to' => $date['time_to']])}}" class="btn btn-primary">Book Room</a>
     </div>
 @endsection

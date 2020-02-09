@@ -12,19 +12,18 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-        $dataInsert = [
-            [
-                'name' => 'Test name 1',
-                'email' => 'email01@gmail.com',
-                'password' => bcrypt('123456'),
-            ],
-            [
-                'name' => 'Test name 2',
-                'email' => 'email02@gmail.com',
-                'password' => bcrypt('123456'),
-            ]
-        ];
-
-        DB::table('users')->insert($dataInsert);
+        $roles = DB::table('roles')->get();
+        if (!empty($roles)){
+            foreach ($roles as $key => $role) {
+                $dataInsert = [
+                    'name' => 'nguyen van a'. $key,
+                    'email' => 'nguyenvana' . $key .'@gmail.com',
+                    'password' => bcrypt('123456'),
+                    'role_id' => $role->id
+                ];
+                DB::table('users')->insert($dataInsert);
+            }
+        }
     }
+
 }

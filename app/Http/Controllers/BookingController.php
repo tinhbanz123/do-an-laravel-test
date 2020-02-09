@@ -44,7 +44,7 @@ class BookingController extends Controller
         $data = [];
 //        $room = Room::where('status','!=',1)->pluck('room_number','id');
 //        dd($room);
-        $customer = Customer::pluck('first_name','id');
+        $customer = Customer::pluck('last_name','id');
         $room_name = Room::findOrFail($params['room_id']);
 //        dd($room_name);
 //        dd($customer);
@@ -75,19 +75,20 @@ class BookingController extends Controller
             'customer_id' => $params['name'],
         ];
 //        dd($dataInsert);
-        $dataRoom = ['status' => 1];
+//        $dataRoom = ['status' => 1];
         try {
             DB::beginTransaction();
 
             Booking::insert($dataInsert);
             //chuyển status room sang trạng thái hết phòng
-            Room::where('id',$dataInsert['room_id'])->update($dataRoom);
+//            Room::where('id',$dataInsert['room_id'])->update($dataRoom);
             DB::commit();
 
             return redirect(route('booking.index'))->with('success', 'thêm mới thành công.');
         } catch (\Exception $exception) {
             DB::rollBack();
             return redirect(route('booking.index'))->with('error', 'thêm mới thất bại.');
+//            return redirect(route('search-room.find_rooms',['time_from' => $dataInsert['time_from'],'time_to' => $dataInsert['time_to']]))->with('error', 'thêm mới thất bại.');
         }
     }
 

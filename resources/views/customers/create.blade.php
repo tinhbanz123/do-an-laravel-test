@@ -43,7 +43,7 @@
                 <input type="text" class='form-control' name='pass'>
             </div>
 
-            <div class='form-group'>
+{{--            <div class='form-group'>--}}
 {{--                <label for="">Role</label>--}}
 {{--                @if($roles)--}}
 {{--                    <select name="role" class="form-control">--}}
@@ -53,8 +53,8 @@
 {{--                        @endforeach--}}
 {{--                    </select>--}}
 {{--                @endif--}}
-                <input type="hidden" name="role" value="3">
-            </div>
+{{--                <input type="hidden" name="role" value="3">--}}
+{{--            </div>--}}
 
 
             <div class='form-group'>

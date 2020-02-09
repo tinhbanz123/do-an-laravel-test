@@ -6,8 +6,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class Customer extends Model
 {
-    public function bookings()
+    public function role()
     {
-        return $this->hasOne('App\Model\Booking', 'customer_id','id');
+        return $this->belongsTo('App\Model\Role','role_id','id');
     }
+//    public function booking()
+//    {
+//        return $this->hasOne('App\Model\Booking', 'customer_id','id');
+//    }
+
 }

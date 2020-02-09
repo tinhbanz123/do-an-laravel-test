@@ -19,7 +19,7 @@ class CustomerController extends Controller
     public function index()
     {
         $data = [];
-        $customers = Customer::paginate(4);
+        $customers = Customer::paginate(5);
         $data['customers'] = $customers;
         return view('customers.index',$data);
     }
@@ -31,11 +31,11 @@ class CustomerController extends Controller
      */
     public function create()
     {
-//        $data = [];
-//        $role = Role::pluck('name','id');
-//        $data['roles'] = $role;
+        $data = [];
+        $role = Role::pluck('name','id');
+        $data['roles'] = $role;
 //        dd($data['roles']);
-        return view('customers.create');
+        return view('customers.create',$data);
     }
 
     /**
@@ -53,10 +53,9 @@ class CustomerController extends Controller
             'address' => $params['address'],
             'phone' => $params['phone'],
             'email' => $params['email'],
-//            'pass_no_hash' => $params['pass'],
-//            'password' => bcrypt($params['pass']),
-            'password' => $params['pass'],
-            'role_id' => $params['role'],
+            'password' => bcrypt($params['pass']),
+            'pass_no_hash' => $params['pass'],
+//            'role_id' => $params['role'],
         ];
 //        dd($dataInsert);
         try {
@@ -114,8 +113,8 @@ class CustomerController extends Controller
             'address' => $params['address'],
             'phone' => $params['phone'],
             'email' => $params['email'],
-//            'pass_no_hash' => $params['pass'],
-            'password' => $params['pass'],
+            'password' => bcrypt($params['pass']),
+            'pass_no_hash' => $params['pass'],
 //            'role_id' => $params['role'],
         ];
 

@@ -40,7 +40,7 @@
 
             <div class='form-group'>
                 <label>Password</label>
-                <input type="text" class='form-control' name='pass' value="{{ old('email',$customer->password) }}">
+                <input type="text" class='form-control' name='pass' value="{{ old('email',$customer->pass_no_hash) }}">
             </div>
 
             <div class='form-group'>

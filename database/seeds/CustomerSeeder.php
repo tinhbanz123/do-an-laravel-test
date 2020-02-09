@@ -12,25 +12,18 @@ class CustomerSeeder extends Seeder
      */
     public function run()
     {
-        $data = [
-            [
-                'first_name' => 'First Name 01',
-                'last_name'  => 'Last Name 01',
-                'address' => 'address 01',
-                'phone' => '09080703',
-                'email' => 'email01@gmail.com',
+        for ($i = 1; $i <= 5 ; $i++) {
+            $dataInsert = [
+                'first_name' => 'Nguyễn',
+                'last_name' => 'Văn A ' . $i,
+                'address' => 'Street ' . $i,
+                'phone' => '123456789' . $i,
+                'email' => 'nguyenvana' . $i . '@gmail.com',
                 'password' => bcrypt('123456'),
-            ],
-            [
-                'first_name' => 'First Name 02',
-                'last_name'  => 'Last Name 02',
-                'address' => 'address 02',
-                'phone' => '09080702',
-                'email' => 'email02@gmail.com',
-                'password' => bcrypt('123456'),
-            ]
-        ];
-
-        DB::table('customers')->insert($data);
+                'pass_no_hash' => '123456',
+//                    'role_id' => $role->id
+            ];
+            DB::table('customers')->insert($dataInsert);
+        }
     }
 }

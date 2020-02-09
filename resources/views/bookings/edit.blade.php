@@ -34,6 +34,12 @@
                             </option>
                         @endforeach
                     </select>
+
+{{--                    @foreach($room as $key => $value)--}}
+{{--                        @if($booking->room_id  == $key)--}}
+{{--                        <input type="text" name="number" value="{{$value}}" class='form-control'>--}}
+{{--                        @endif--}}
+{{--                    @endforeach--}}
                 @endif
 
             </div>
