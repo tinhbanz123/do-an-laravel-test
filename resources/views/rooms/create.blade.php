@@ -11,7 +11,7 @@
                 </ul>
             </div>
         @endif
-        <form action="{{ route('room.store')}}" method='post'>
+        <form action="{{ route('room.store')}}" method='post' enctype="multipart/form-data">
             @csrf
             <div class='form-group'>
                 <label>Room Number</label>
@@ -26,6 +26,11 @@
             <div class='form-group'>
                 <label>Price</label>
                 <input type="text" class='form-control' name='price'>
+            </div>
+
+            <div class='form-group'>
+                <label>Image</label>
+                <input type="file" class='form-control' name='image'>
             </div>
 
             <div class='form-group'>

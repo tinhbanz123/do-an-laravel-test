@@ -51,6 +51,13 @@ Route::group(['prefix' => 'booking','as' => 'booking.'], function(){
 Route::group(['prefix' => 'search-room','as' => 'search-room.'], function(){
     Route::get('/', 'SearchRoomController@index')->name('find_rooms');
 });
+
+Route::group(['prefix' => 'slide','as' => 'slide.'], function(){
+    Route::get('/create/{id}', 'SlideController@create')->name('create');
+    Route::post('/store','SlideController@store') ->name('store');
+});
+
+
 //code năm mới 10:27 AM , 02/02/2020
 
 Auth::routes();

@@ -19,6 +19,7 @@ class CreateRoomsTable extends Migration
             $table->text('description');
             $table->boolean('status')->default(0);
             $table->integer('price');
+            $table->string('image');
             $table->timestamps();
         });
     }

@@ -15,6 +15,7 @@
 
         <div class='form-group'>
             <form action="{{ route('search-room.find_rooms')}}" method='get'>
+{{--                method = get --> đưa giá trị lên thanh địa chỉ--}}
     {{--            @csrf--}}
                 <div class='form-group'>
                     <label>Time from *</label>
@@ -27,7 +28,6 @@
                     <input type="date" class='form-control' name='time_to'  required
                            value="{{ old('time_to',$time_to) }}">
                 </div>
-
 
                 <div class='form-group'>
                     <button type='submit' class='btn btn-primary'>Search</button>
@@ -51,8 +51,8 @@
                             <td>{{ $value->id}}</td>
                             <td>{{ $value->room_number }}</td>
                             <td>{{ $value->description }}</td>
-                            <td>{{ $value->price . ' / ngày' }}</td>
-                            <td><a href="{{ route('room.show',['id' => $value->id,'time_from' => $time_from, 'time_to' => $time_to])}}" class="btn btn-success">Detail</a></td>
+                            <td>{{ number_format($value->price) . ' / ngày' }}</td>
+                            <td><a href="{{ route('room.show',['id' => $value->id,'time_from' => $time_from, 'time_to' => $time_to])}}" class="btn btn-success">Detail Room</a></td>
                             <td><a href="{{ route('booking.create',['room_id' => $value->id,'time_from' => $time_from, 'time_to' => $time_to])}}" class="btn btn-primary">Book Room</a></td>
                         </tr>
                     @endforeach

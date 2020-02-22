@@ -39,15 +39,18 @@
                     <th>Description</th>
                     <th>Status</th>
                     <th>Price</th>
-                    <th colspan="3">Action</th>
+                    <th>Image</th>
+                    <th colspan="4">Action</th>
                 </tr>
+
                 @foreach($rooms as $value)
                     <tr>
                         <td>{{ $value->id}}</td>
                         <td>{{ $value->room_number }}</td>
                         <td>{{ $value->description }}</td>
                         <td>{{ ($value->status == 0) ? 'còn phòng' : 'hết phòng' }}</td>
-                        <td>{{ $value->price . ' / ngày' }}</td>
+                        <td>{{ number_format($value->price) . ' / ngày' }}</td>
+                        <td><img onclick="MymodalImage(this);" src="{{ asset('/image_room/' . $value->image)}}" alt="{{$value->image}}" width="300px" height="300px"></td>
                         <td><a href="{{ route('room.show', $value->id) }}" class="btn btn-success">Detail</a></td>
                         <td><a href="{{ route('room.edit', $value->id) }}" class="btn btn-primary">Edit</a></td>
                         <td>
@@ -56,6 +59,8 @@
                                  <button type="button" class="btn btn-danger" onclick="confirmDelete(this)">Delete</button>
                             </form>
                         </td>
+
+                        <td><a href="{{ route('slide.create',$value->id) }}" class="btn btn-success">Slider</a></td>
                     </tr>
                 @endforeach
             </table>
@@ -67,6 +72,36 @@
             </div>
         @endif
     </div>
+
+{{--    thực hiện click image ==> phóng to--}}
+
+
+
+{{--    <div id="myModal" class="modal">--}}
+{{--        <span class="close">&times;</span>--}}
+{{--        <img class="modal-content" id="img01">--}}
+{{--        <div id="caption"></div>--}}
+{{--    </div>--}}
+{{--    <script>--}}
+{{--        function MymodalImage(e)--}}
+{{--        {--}}
+{{--            // Get the modal--}}
+{{--            var modal = document.getElementById('myModal');--}}
+{{--            // Get the image and insert it inside the modal - use its "alt" text as a caption--}}
+{{--            var modalImg = document.getElementById("img01");--}}
+{{--            var captionText = document.getElementById("caption");--}}
+{{--            modal.style.display = "block";--}}
+{{--            modalImg.src = e.src;--}}
+{{--            captionText.innerHTML = e.alt;--}}
+{{--            // Get the <span> element that closes the modal--}}
+{{--            var span = document.getElementsByClassName("close")[0];--}}
+{{--            // When the user clicks on <span> (x), close the modal--}}
+{{--            span.onclick = function() {--}}
+{{--                modal.style.display = "none";--}}
+{{--            }--}}
+{{--        }--}}
+{{--    </script>--}}
+
 @endsection
     @push('css')
         <link rel="stylesheet" href="{{ asset('assets/room.css') }}">

@@ -8,6 +8,11 @@ class Room extends Model
 {
     public function booking()
     {
-        return $this->hasOne('App\Model\Booking', 'room_id','id');
+        return $this->hasMany('App\Model\Booking', 'room_id','id');
+    }
+
+    public function slide()
+    {
+        return $this->hasMany('App\Model\Slide', 'room_id','id');
     }
 }

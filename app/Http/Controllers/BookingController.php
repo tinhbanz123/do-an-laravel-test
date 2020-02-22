@@ -6,6 +6,7 @@ use App\Model\Booking;
 use App\Model\Customer;
 use App\Model\Room;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 
 class BookingController extends Controller
@@ -41,12 +42,20 @@ class BookingController extends Controller
             'room_id' => $params['room_id'],
         ];
 //        dd($params);
+
+        //tính số ngày
+        $start_date = Carbon::parse($params['time_from']);
+        $end_date = Carbon::parse($params['time_to']);
+        $diff_in_days = $start_date->diffInDays($end_date);
+//        dd($diff_in_days);
+
+
         $data = [];
 //        $room = Room::where('status','!=',1)->pluck('room_number','id');
 //        dd($room);
         $customer = Customer::pluck('last_name','id');
         $room_name = Room::findOrFail($params['room_id']);
-//        dd($room_name);
+//        dd($diff_in_days*($room_name->price));
 //        dd($customer);
 //        $data['rooms'] = $room;
         $data['customers'] = $customer;
@@ -54,6 +63,7 @@ class BookingController extends Controller
 //        $data['time_to'] = $params['time_to'];
         $data['room_name'] = $room_name;
         $data['data_time'] = $dataInsert;
+        $data['money'] = $diff_in_days*($room_name->price);
 //        dd( $data['data']);
 //        dd($data['room_name']);
         return view('bookings.create',$data);

@@ -10,9 +10,9 @@ class Customer extends Model
     {
         return $this->belongsTo('App\Model\Role','role_id','id');
     }
-//    public function booking()
-//    {
-//        return $this->hasOne('App\Model\Booking', 'customer_id','id');
-//    }
+    public function booking()
+    {
+        return $this->hasOne('App\Model\Booking', 'customer_id','id');
+    }
 
 }

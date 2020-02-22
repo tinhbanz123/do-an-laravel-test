@@ -50,11 +50,23 @@
                     </select>
                 @endif
 
+{{--dùng session để lấy tên customer booking--}}
+
 {{--                @if(session('customer'))--}}
 {{--                    <select name="name" class="form-control">--}}
 {{--                        <option value="{{session('customer')['id']}}">{{session('customer')['first_name']}}</option>--}}
 {{--                    </select>--}}
 {{--                @endif--}}
+
+
+
+                <div class='form-group'>
+                    <label>Total Money (*VND)</label>
+{{--                    <input type="text" class="form-control" name="total" value={{ number_format($money, 0, ',', '.') }} >--}}
+                    <input type="text" class="form-control" name="total" value={{ number_format($money) }} >
+                </div>
+
+
             </div>
 
             <div class='form-group'>
